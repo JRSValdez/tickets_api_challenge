@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -22,12 +23,15 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $allRoleIds = Role::where('id' ,'>' ,0)->pluck('id')->toArray();
+
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => bcrypt('ticketsApp'), // password
             'remember_token' => Str::random(10),
+            'role_id' => array_rand($allRoleIds,1)
         ];
     }
 
