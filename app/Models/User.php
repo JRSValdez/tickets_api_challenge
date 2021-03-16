@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'user_id',
+        'state_id',
+        'priority_id',
     ];
 
     /**
@@ -41,6 +44,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function is_admin(){
+        return $this->role_id == 1;
+    }
 
     public function tickets(){
         return $this->hasMany(Ticket::class);

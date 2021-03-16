@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddTicketRequest;
 use App\Http\Resources\TicketCollection;
 use App\Http\Resources\TicketResource;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -14,48 +16,29 @@ class TicketController extends Controller
         return new TicketCollection(Ticket::all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(AddTicketRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $newTicket = Ticket::create($validated);
+        return ['success' => true, 'data' => new TicketResource($newTicket)];
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Ticket  $ticket
-     * @return \Illuminate\Http\Response
-     */
     public function show(Ticket $ticket)
     {
-        //
+        return ['success' => true, 'data' => new TicketResource($ticket)];
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Ticket  $ticket
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Ticket $ticket)
+    public function update(AddTicketRequest $request, Ticket $ticket)
     {
-        //
+        $validated = $request->validated();
+        $ticket->update($validated);
+        return ['success' => true, 'data' => new TicketResource($ticket)];
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Ticket  $ticket
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Ticket $ticket)
+    public function ticketsByUser(Request $request)
     {
-        //
+        $user = User::find($request->id);
+        return new TicketCollection($user->tickets);
     }
+
 }
