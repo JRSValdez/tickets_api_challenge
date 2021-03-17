@@ -22,18 +22,27 @@ NOTE: You can configure any connection type you want
 
 Rename the enviroment variables file to **.env**
 
-### #6 `php artisan passport:install`
-
-Install passport configuration
-
-### #7 `php artisan migrate`
+### #6 `php artisan migrate`
 
 Creates all the tables needed for the project
+
+### #7 `php artisan passport:install`
+
+Install passport configuration
 
 ### #8 `php artisan db:seed`
 
 Create fake/dummy registers 
 
-### #9 `php artian serve`
+### #9 `php artisan serve`
 
-Run the proect
+Run the project
+
+### #10 `Credentiasl to login`
+
+Use the any email from the dummy users created in the step **#8** and use the password "**ticketsApp**" to login
+
+## Stack/Technologies
+
+* Laravel
+* Laravel passport
