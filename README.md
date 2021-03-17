@@ -38,7 +38,7 @@ Create fake/dummy registers
 
 Run the project
 
-### #10 `Credentiasl to login`
+### #10 `Credentials to login`
 
 Use the any email from the dummy users created in the step **#8** and use the password "**ticketsApp**" to login
 
